@@ -32,7 +32,9 @@ namespace DiansProject.DAL.Data
 
         private static void SeedFromRawJsonData(DatabaseContext context)
         {
-            string rawDataFilePath = @"C:\Users\ThinkBook\source\repos\DiansProject\DiansProject\DiansProject.DAL\Raw Data\RawPointsData.txt";
+            var asdf = Directory.GetCurrentDirectory();
+            string rawDataFilePath = @"..\DiansProject.DAL\Raw Data\RawPointsData.txt";
+
             string rawDataContent = "";
 
             rawDataContent = File.ReadAllText(rawDataFilePath);
