@@ -1,4 +1,8 @@
+using DiansProject.BLL.Services.Implementations;
+using DiansProject.BLL.Services.Interfaces;
 using DiansProject.DAL.Data;
+using DiansProject.DAL.Repositories.Implementations;
+using DiansProject.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +25,13 @@ var Configuration = new ConfigurationBuilder()
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration["ConnectionStrings"]));
 builder.Services.AddControllersWithViews();
 
+//repositories
+builder.Services.AddTransient<IFeatureRepository, FeatureRepository>();
+
+//services
+builder.Services.AddTransient<IFeatureService, FeatureService>();
+
+
 var app = builder.Build();
 
 DatabaseSeeder.Seed(app.Services);
@@ -41,6 +52,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Features}/{action=Index}/{id?}");
 
 app.Run();
