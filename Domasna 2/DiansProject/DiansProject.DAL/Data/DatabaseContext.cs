@@ -8,6 +8,7 @@ namespace DiansProject.DAL.Data
         public DbSet<Feature> Features { get; set; }
         public DbSet<Geometry> Geometries { get; set; }
         public DbSet<Properties> Properties { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

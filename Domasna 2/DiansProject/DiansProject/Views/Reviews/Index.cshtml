@@ -1,0 +1,33 @@
+﻿@using DiansProject.DAL.Entities
+@model List<Review>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Description
+			</th>
+            <th>
+                OverallRating
+			</th>
+            <th></th>
+		</tr>
+	</thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td width="50%">
+                    @obj.Description
+				</td>
+                <td width="30%">
+                    @obj.OverallRating
+				</td>
+			</tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Features" asp-action="Index">
+        Get Back to map
+</a>

@@ -1,5 +1,91 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using DiansProject.DAL.Entities
+@using System.Reflection
+@model Feature
+
+
+<form>
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2>Details of Parking space</h2>
+            <hr />
+        </div>
+        <div class=mb-3>
+            <label class="border bg-info" asp-for="Properties.Amenity">Parking Type:</label>
+            <span>@Model.Properties.Amenity</span>
+        </div>
+
+        @if(!string.IsNullOrEmpty(@Model.Properties.Name))
+        {
+            <div class=mb-3>
+                <label asp-for="Properties.Access">Parking Name:</label>
+                <span>@Model.Properties.Name</span>
+            </div>
+        }
+
+        @if(!string.IsNullOrEmpty(@Model.Properties.Access))
+        {
+            <div class=mb-3>
+                <label asp-for="Properties.Access">Access To park:</label>
+                <span>@Model.Properties.Access</span>
+            </div>
+        }
+
+        <div class=mb-3>
+                <label asp-for="Properties.Access">Is Free to park:</label>
+                <span>
+                @if(string.IsNullOrEmpty(@Model.Properties.Fee))
+                {
+                    <text>No Data</text>
+                } else
+                {
+                    <text>@Model.Properties.Fee</text>
+                }
+            </span>
+        </div>
+
+        @if(!string.IsNullOrEmpty(@Model.Properties.Parking))
+        {
+            <div class=mb-3>
+                <label asp-for="Properties.Parking">Parking Level:</label>
+                <span>@Model.Properties.Parking</span>
+            </div>
+        }
+
+        @if(!string.IsNullOrEmpty(@Model.Properties.Capacity))
+        {
+            <div class=mb-3>
+                <label asp-for="Properties.Capacity">Parking Capacity:</label>
+                <span>@Model.Properties.Capacity</span>
+            </div>
+        }
+
+        @if(!string.IsNullOrEmpty(@Model.Properties.Wheelchair))
+        {
+            <div class=mb-3>
+                <label asp-for="Properties.Capacity">Wheelchair Accessible:</label>
+                <span>@Model.Properties.Wheelchair</span>
+            </div>
+        }
+
+        <form > 
+        </form>
+
+        @using (Html.BeginForm("Index", "Reviews"))
+        {
+            <p>
+                <input type='hidden' name='featureId' value='@Model.Id' />  
+                <input type='submit' value='See all reviews' name='SubmitButton'/>
+            </p>
+        }
+
+        <form > 
+        </form>
+        @using (Html.BeginForm("Create", "Reviews", FormMethod.Get))
+        {
+            <p>
+                <input type='hidden' name='featureId' value='@Model.Id' />  
+                <input type='submit' value='Add Review'/>
+            </p>
+        }
+    </div>
+</form>

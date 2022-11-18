@@ -1,0 +1,35 @@
+﻿@using DiansProject.DAL.Entities
+@model Review
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Add Review</h2>
+            <hr />
+        </div>
+        <input  type="hidden" value=@TempData["FeatureId"] name="featureId"/>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+        </div>
+
+        <div class="mb-3" style="width:300px;">
+            <label asp-for="ConditionsRating">Conditions Rating (1-5)</label>
+            <input class="form-range" type="range" max="5" min="1" asp-for="ConditionsRating" class="form-control" />
+        </div>
+
+        <div class="mb-3" style="width:300px;">
+            <label asp-for="SafetyRating">Safety Rating (1-5)</label>
+            <input class="form-range" type="range" max="5" min="1" asp-for="SafetyRating" class="form-control" />
+        </div>
+
+        <div class="mb-3" style="width:300px;">
+            <label asp-for="OverallRating">Overall Rating (1-5)</</label>
+            <input class="form-range" type="range" max="5" min="1" asp-for="OverallRating" class="form-control" />
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+    <a asp-controller="Features" asp-action="Index">
+        Get Back to map
+    </a>
+</form>

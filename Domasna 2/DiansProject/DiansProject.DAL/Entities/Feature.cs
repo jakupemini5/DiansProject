@@ -12,5 +12,6 @@ namespace DiansProject.DAL.Entities
         public string? Type { get; set; }
         public virtual Properties Properties { get; set; }
         public virtual Geometry Geometry { get; set; }
+        public virtual List<Review> Reviews { get; set; }
     }
 }
