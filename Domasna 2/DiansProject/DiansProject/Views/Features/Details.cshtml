@@ -2,37 +2,71 @@
 @using System.Reflection
 @model Feature
 
-
-<form>
+<div style="padding-left:10%; padding-right:10%">
+    <form>
     <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2>Details of Parking space</h2>
+
+        <div class="row pb-2" style="margin:auto">
+
+            <table  class="table table-bordered table-striped" style="width:100%; display:inline-table">
+                <thead>
+                    <tr>
+                        <th width=80% >
+                            <h2>Details of Parking space </h2>
+			            </th>
+                        <th >
+                            <form > 
+                            </form>
+                            @using (Html.BeginForm("Index", "Reviews"))
+                            {
+                                <span>
+                                    <input type='hidden' name='featureId' value='@Model.Id' />  
+                                    <input class="btn btn-lg btn-outline-primary" type='submit' value='See all reviews' name='SubmitButton'/>
+                                </span>
+                            }
+			            </th>
+                        <th>
+                           <form > 
+                            </form>
+                            @using (Html.BeginForm("Create", "Reviews", FormMethod.Get))
+                            {
+                                <span>
+                                    <input type='hidden' name='featureId' value='@Model.Id' />  
+                                    <input class="btn btn-lg btn-outline-secondary" type='submit' value='Add Review'/>
+                                </span>
+                            }
+			            </th>
+		            </tr>
+	            </thead>
+            </table>
+            
+
             <hr />
         </div>
         <div class=mb-3>
-            <label class="border bg-info" asp-for="Properties.Amenity">Parking Type:</label>
-            <span>@Model.Properties.Amenity</span>
+            <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Amenity">Parking Type: </label>
+            <span style="width:60%; float:right;" class="badge rounded-pill bg-light">@Model.Properties.Amenity</span>
         </div>
 
         @if(!string.IsNullOrEmpty(@Model.Properties.Name))
         {
             <div class=mb-3>
-                <label asp-for="Properties.Access">Parking Name:</label>
-                <span>@Model.Properties.Name</span>
+                <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Access">Parking Name: </label>
+                <span style="width:60%; float:right;" class="badge rounded-pill bg-light">@Model.Properties.Name</span>
             </div>
         }
 
         @if(!string.IsNullOrEmpty(@Model.Properties.Access))
         {
             <div class=mb-3>
-                <label asp-for="Properties.Access">Access To park:</label>
-                <span>@Model.Properties.Access</span>
+                <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Access">Access To park: </label>
+                <span style="width:60%; float:right;" class="badge rounded-pill bg-light">@Model.Properties.Access</span>
             </div>
         }
 
         <div class=mb-3>
-                <label asp-for="Properties.Access">Is Free to park:</label>
-                <span>
+                <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Fee">Is Free to park: </label>
+                <span style="width:60%; float:right;" class="badge rounded-pill bg-light">
                 @if(string.IsNullOrEmpty(@Model.Properties.Fee))
                 {
                     <text>No Data</text>
@@ -46,46 +80,27 @@
         @if(!string.IsNullOrEmpty(@Model.Properties.Parking))
         {
             <div class=mb-3>
-                <label asp-for="Properties.Parking">Parking Level:</label>
-                <span>@Model.Properties.Parking</span>
+                <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Parking">Parking Level: </label>
+                <span style="width:60%; float:right;" class="badge rounded-pill bg-light">@Model.Properties.Parking</span>
             </div>
         }
 
         @if(!string.IsNullOrEmpty(@Model.Properties.Capacity))
         {
             <div class=mb-3>
-                <label asp-for="Properties.Capacity">Parking Capacity:</label>
-                <span>@Model.Properties.Capacity</span>
+                <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Capacity">Parking Capacity: </label>
+                <span style="width:60%; float:right;" class="badge rounded-pill bg-light">@Model.Properties.Capacity</span>
             </div>
         }
 
         @if(!string.IsNullOrEmpty(@Model.Properties.Wheelchair))
         {
             <div class=mb-3>
-                <label asp-for="Properties.Capacity">Wheelchair Accessible:</label>
-                <span>@Model.Properties.Wheelchair</span>
+                <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Wheelchair">Wheelchair Accessible:</label>
+                <span style="width:60%; float:right;" class="badge rounded-pill bg-light">@Model.Properties.Wheelchair</span>
             </div>
-        }
-
-        <form > 
-        </form>
-
-        @using (Html.BeginForm("Index", "Reviews"))
-        {
-            <p>
-                <input type='hidden' name='featureId' value='@Model.Id' />  
-                <input type='submit' value='See all reviews' name='SubmitButton'/>
-            </p>
-        }
-
-        <form > 
-        </form>
-        @using (Html.BeginForm("Create", "Reviews", FormMethod.Get))
-        {
-            <p>
-                <input type='hidden' name='featureId' value='@Model.Id' />  
-                <input type='submit' value='Add Review'/>
-            </p>
         }
     </div>
 </form>
+
+</div>

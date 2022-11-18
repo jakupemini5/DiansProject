@@ -1,33 +1,76 @@
 ﻿@using DiansProject.DAL.Entities
 @model List<Review>
 
-<table class="table table-bordered table-striped" style="width:100%">
-    <thead>
-        <tr>
-            <th>
-                Description
-			</th>
-            <th>
-                OverallRating
-			</th>
-            <th></th>
-		</tr>
-	</thead>
-    <tbody>
-        @foreach(var obj in Model)
-        {
-            <tr>
-                <td width="50%">
-                    @obj.Description
-				</td>
-                <td width="30%">
-                    @obj.OverallRating
-				</td>
-			</tr>
-        }
-    </tbody>
-</table>
+<div style="padding-left:10%; padding-right:10%">
+    <br />
+    <br />
 
-<a asp-controller="Features" asp-action="Index">
-        Get Back to map
-</a>
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    <h2>Parking space Reviews</h2>
+			    </th>
+                <th>
+                    <form asp-controller="Features" asp-action="Details">
+                        <input type='hidden' name='Id' value='@TempData["featureId"]' />  
+                        <input style="float:right;" class="btn btn-lg btn-outline-dark" type='submit' value='Get back to details'/>
+                    </form>
+			    </th>
+		    </tr>
+	    </thead>
+    </table>
+
+
+
+    <table class="table table-bordered table-striped" style="width:100%; table-layout: fixed; ">
+        <thead>
+            <tr>
+                <th width="16%">
+                    Date
+			    </th>
+                <th width="50%" style="word-wrap: break-word">
+                    Description
+			    </th>
+                <th>
+                    Overall Rating
+			    </th>
+                <th>
+                    Safety Rating
+			    </th>
+                <th>
+                    Conditions Rating
+                </th>
+		    </tr>
+	    </thead>
+        <tbody>
+            @foreach(var obj in Model)
+            {
+                <tr>
+                    <td>
+                        @obj.Date.ToShortDateString() - @obj.Date.ToShortTimeString()
+				    </td>
+                    <td style="word-wrap: break-word">
+                        @obj.Description
+				    </td>
+                    <td>
+                        <div class="progress">
+                          <div class="progress-bar bg-warning" role="progressbar" style="width: @(obj.OverallRating*20)%;" aria-valuenow=@obj.OverallRating aria-valuemin="1" aria-valuemax="5" ></div>
+                        </div>
+				    </td>
+                    <td>
+                        <div class="progress">
+                          <div class="progress-bar bg-warning" role="progressbar" style="width: @(obj.SafetyRating*20)%;" aria-valuenow=@obj.SafetyRating aria-valuemin="1" aria-valuemax="5" ></div>
+                        </div>
+				    </td>
+                    <td>
+                        <div class="progress">
+                          <div class="progress-bar bg-warning" role="progressbar" style="width: @(obj.ConditionsRating*20)%;" aria-valuenow=@obj.ConditionsRating aria-valuemin="1" aria-valuemax="5" ></div>
+                        </div>
+				    </td>
+
+			    </tr>
+            }
+        </tbody>
+    </table>
+</div>

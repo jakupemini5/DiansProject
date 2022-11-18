@@ -26,7 +26,7 @@ namespace DiansProject.DAL.Repositories.Implementations
             {
                 return null;
             }
-            return feature.Reviews.ToList();
+            return feature.Reviews.OrderByDescending(x => x.Date).ToList();
         }
 
         public async Task AddFeatureReview(string featureId, Review review)

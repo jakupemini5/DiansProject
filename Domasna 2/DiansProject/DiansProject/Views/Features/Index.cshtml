@@ -4,7 +4,7 @@
 <style>
     #map {
         height:800px;
-        width:1200px;
+        width:100%;
 }
 
 </style>
@@ -29,7 +29,7 @@
             marker
             .bindPopup(
                 "Latitude: @item.Geometry.Latitude ,<br> Longitude: @item.Geometry.Longitude <br> " + 
-                "<form action='Features/Details'> <input type='hidden' name='Id' value='@item.Id' />  <input type='submit' value='View Details' name='SubmitButton'/></form>"
+                "<form action='Features/Details'> <input type='hidden' name='Id' value='@item.Id' />  <input type='submit' value='View Details' class='btn btn-primary' name='SubmitButton'/></form>"
             )
         </text>
     }

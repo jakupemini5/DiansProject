@@ -16,6 +16,7 @@ namespace DiansProject.Controllers
         public async Task<IActionResult> Index(string featureId)
         {
             var result = await _reviewService.GetFeatureReviews(featureId);
+            TempData["FeatureId"] = featureId;
             return View(result);
         }
         [HttpGet]
