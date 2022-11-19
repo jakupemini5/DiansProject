@@ -29,6 +29,8 @@ namespace DiansProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(string featureId, Review model)
         {
+            if (!ModelState.IsValid)
+                return View(model);
             await _reviewService.AddFeatureReview(featureId, model);
             return RedirectToAction("Index",new { featureId=featureId});
         }

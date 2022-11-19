@@ -1,4 +1,5 @@
 ﻿using DiansProject.DAL.Entities;
+using DiansProject.DAL.Enums;
 using DiansProject.DAL.Models;
 using DiansProject.Models.DTOs;
 
@@ -8,6 +9,5 @@ namespace DiansProject.Models
     {
         public SearchParameters? SearchParameters { get; set; }
         public List<FeatureResponseDTO>? Features { get; set; }
-        
     }
 }

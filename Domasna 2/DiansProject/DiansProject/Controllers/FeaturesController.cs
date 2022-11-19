@@ -25,8 +25,11 @@ namespace DiansProject.Controllers
             {
                 TempData["searchParameters.SearchText"] = model.SearchParameters.SearchText;
                 TempData["searchParameters.CapacityCount"] = model.SearchParameters.CapacityCount;
+                TempData["searchParameters.AverageConditionsRating"] = model.SearchParameters.AverageConditionsRating.ToString();
+                TempData["searchParameters.AverageSafetyRating"] = model.SearchParameters.AverageSafetyRating.ToString();
+                TempData["searchParameters.AverageOverallRating"] = model.SearchParameters.AverageOverallRating.ToString();
             }
-            
+
 
             var results = await _featureService.GetAllFeatures(model.SearchParameters);
 

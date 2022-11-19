@@ -10,12 +10,12 @@
 
 </style>
 
-<table  class="table table-bordered table-striped" style="width:100%; display:inline-table; padding:0px; margin:0px; vertical-align: top;">
+<table  class="table table-bordered" style="width:100%; display:inline-table; padding:0px; margin:0px; vertical-align: top;">
     <tbody>
         <tr>
             <td width=20% style="padding:0px; margin:0px; vertical-align: top;">
                 <form asp-controller="Features" asp-action="Index">
-                    <table  class="table table-bordered table-striped" style="width:100%; display:inline-table; padding:0px; margin:0px;">
+                    <table  class="table table-bordered" style="width:100%; display:inline-table; padding:0px; margin:0px;">
                         <thead>
                             <tr>
                                 <th width=20% style="">
@@ -26,19 +26,63 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input asp-for="@Model.SearchParameters.CapacityCount" type="number" value=@TempData["searchParameters.CapacityCount"] /><br />
-                                    <span asp-validation-for="@Model.SearchParameters.CapacityCount"></span>
+                                    <input class="form-control" asp-for="@Model.SearchParameters.SearchText" type="text" placeholder="Search by park name" value=@TempData.Peek("searchParameters.SearchText") />
+                                    <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.SearchParameters.SearchText"></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input asp-for="@Model.SearchParameters.SearchText" type="text" value=@TempData["searchParameters.SearchText"] />
-                                    <span asp-validation-for="@Model.SearchParameters.SearchText"></span>
+                                    <label class="badge bg-black" asp-for="@Model.SearchParameters.CapacityCount">Capacity count more than:</label>
+                                    <input class="form-control" asp-for="@Model.SearchParameters.CapacityCount" type="number" value=@TempData.Peek("searchParameters.CapacityCount") />
+                                    <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.SearchParameters.CapacityCount"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-black" asp-for="@Model.SearchParameters.ParkingType:"> Parking Type: </label>
+                                    <select class="form-select" asp-for="@Model.SearchParameters.ParkingType">
+                                      <option value="0">All parking types</option>
+                                      <option value="1">Car parking</option>
+                                      <option value="2">Bicycle Parking</option>
+                                    </select>
+                                    <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.SearchParameters.ParkingType"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-black" asp-for="@Model.SearchParameters.PaymentType:"> Payment Type: </label>
+                                    <select class="form-select" asp-for="@Model.SearchParameters.PaymentType">
+                                      <option value="0">All parking types</option>
+                                      <option value="1">Free Parking</option>
+                                      <option value="2">Paid Parking</option>
+                                    </select>
+                                    <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.SearchParameters.PaymentType"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-black" asp-for="@Model.SearchParameters.AverageOverallRating">Overall rating more than:</label>
+                                    <input class="form-control" asp-for="@Model.SearchParameters.AverageOverallRating" type="number" step="any" value=@TempData.Peek("searchParameters.AverageOverallRating") />
+                                    <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.SearchParameters.AverageOverallRating"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-black" asp-for="@Model.SearchParameters.AverageSafetyRating">Safety rating more than:</label>
+                                    <input class="form-control" asp-for="@Model.SearchParameters.AverageSafetyRating" type="number" value=@TempData.Peek("searchParameters.AverageSafetyRating") />
+                                    <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.SearchParameters.AverageSafetyRating"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="badge bg-black" asp-for="@Model.SearchParameters.AverageConditionsRating">Conditions rating more than:</label>
+                                    <input class="form-control" asp-for="@Model.SearchParameters.AverageConditionsRating" type="number" value=@TempData.Peek("searchParameters.AverageConditionsRating") />
+                                    <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.SearchParameters.AverageConditionsRating"></span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <input class="btn btn-outline-primary" type="submit" />
+                    <input style=" margin:5px; width:80%" class="btn btn-outline-primary" type="submit" value='Filter'/>
                 </form>
                 
 			</td>
@@ -69,8 +113,10 @@
             .bindPopup(
                 "<div style='width:100%;' class='badge rounded-pill bg-light'>Latitude: @item.Geometry.Latitude</div> <br>" +
                 "<div style='width:100%;' class='badge rounded-pill bg-light'>Longitude: @item.Geometry.Longitude</div> <br>" +
-                //"<br> Overall Rating: @item.AverageOverallRating <br> Safety Rating: @item.AverageSafetyRating <br> Conditions Rating: @item.AverageConditionsRating <br>" + 
-                "<form action='Features/Details'mvc target='_blank'> <input type='hidden' name='Id' value='@item.Id' />  <input type='submit' value='View Details' class='btn btn-primary' name='SubmitButton'/></form>"
+                "<div style='width:100%;' class='badge bg-warning'>Overall rating: @item.AverageOverallRating</div> <br>" +
+                "<div style='width:100%;' class='badge bg-warning'>Safety rating: @item.AverageSafetyRating</div> <br>" +
+                "<div style='width:100%;' class='badge bg-warning'>Conditions rating: @item.AverageConditionsRating</div> <br> <br>" +
+                "<form action='Features/Details'mvc target='_blank'> <input type='hidden' name='Id' value='@item.Id' />  <input type='submit' value='View Details' class='btn btn-outline-primary' name='SubmitButton'/></form>"
             )
         </text>
     }
