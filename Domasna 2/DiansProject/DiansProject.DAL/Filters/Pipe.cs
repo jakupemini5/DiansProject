@@ -7,23 +7,24 @@ using System.Threading.Tasks;
 
 namespace DiansProject.DAL.Filters
 {
-    public class Pipe<T>
+    public class Pipe<I,O>
     {
-        private List<IFilter<T>> filters = new List<IFilter<T>>();
+        private List<IFilter<I,O>> filters = new List<IFilter<I,O>>();
 
-        public void addFilter(IFilter<T> filter)
+        public void addFilter(IFilter<I,O> filter)
         {
             filters.Add(filter);
         }
 
-        public T runFilters(T input)
+        public O runFilters(I input)
         {
-            foreach (IFilter<T> filter in  filters)
+            O output = default(O);
+            foreach (IFilter<I,O> filter in  filters)
             {
-                input = filter.execute(input);
+                output = filter.execute(input);
 
             }
-            return input;
+            return output;
         }
     }
 }

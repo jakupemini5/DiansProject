@@ -39,10 +39,13 @@ namespace DiansProject.DAL.Data
 
             rawDataContent = File.ReadAllText(rawDataFilePath);
 
-            Pipe<string> pipe = new Pipe<string>();
+            Pipe<string,string> pipe = new Pipe<string,string>();
             ToUpperCaseFilter toUpperCaseFilter = new ToUpperCaseFilter();
-
             pipe.addFilter(toUpperCaseFilter);
+
+            Pipe<string,int> toIntPipe = new Pipe<string,int>();
+            ToIntParseFilter toIntParseFilter = new ToIntParseFilter();
+            toIntPipe.addFilter(toIntParseFilter);
 
 
             var openStreetData = JsonConvert.DeserializeObject<OpenStreetData>(rawDataContent);
@@ -65,10 +68,10 @@ namespace DiansProject.DAL.Data
                         Access = feature.Properties.Access,
                         Amenity = pipe.runFilters(feature.Properties.Amenity),
                         BicycleParking = feature.Properties.BicycleParking,
-                        Capacity = feature.Properties.Capacity,
+                        Capacity = toIntPipe.runFilters(feature.Properties.Capacity),
                         Covered = feature.Properties.Covered,
                         Fee =  feature.Properties.Fee,
-                        Level = feature.Properties.Level,
+                        Level = toIntPipe.runFilters(feature.Properties.Level),
                         Name = feature.Properties.Name,
                         NameEn = feature.Properties.NameEn,
                         Operator = feature.Properties.Operator,

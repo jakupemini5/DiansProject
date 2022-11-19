@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DiansProject.DAL.Filters.Interfaces
 {
-    public interface IFilter<T>
+    public interface IFilter<I, O>
     {
-        T execute(T input);
+        O execute(I input);
     }
 }

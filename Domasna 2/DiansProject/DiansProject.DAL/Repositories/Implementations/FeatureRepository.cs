@@ -1,5 +1,6 @@
 ﻿using DiansProject.DAL.Data;
 using DiansProject.DAL.Entities;
+using DiansProject.DAL.Models;
 using DiansProject.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,9 +20,21 @@ namespace DiansProject.DAL.Repositories.Implementations
             _databaseContext = context;
         }
 
-        public async Task<List<Feature>> GetAllFeatures()
+        public async Task<List<Feature>> GetAllFeatures(SearchParameters? searchParameters)
         {
-            return await _databaseContext.Features.ToListAsync();
+            IQueryable<Feature> query = _databaseContext.Features;
+
+            if (searchParameters == null)
+                return await query.ToListAsync();
+
+            if (searchParameters.CapacityCount > 0)
+                query = query.Where(feature => feature.Properties.Capacity!=null && 
+                feature.Properties.Capacity > searchParameters.CapacityCount);
+            if ( !string.IsNullOrEmpty(searchParameters.SearchText))
+                query = query.Where(feature => !string.IsNullOrEmpty(feature.Properties.Name) && feature.Properties.Name.Contains(searchParameters.SearchText));
+
+
+            return await query.ToListAsync();
         }
 
         public async Task<Feature> GetFeatureById(string id)

@@ -45,7 +45,15 @@
         </div>
         <div class=mb-3>
             <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Amenity">Parking Type: </label>
-            <span style="width:60%; float:right;" class="badge rounded-pill bg-light">@Model.Properties.Amenity</span>
+            <span style="width:60%; float:right;" class="badge rounded-pill bg-light">
+                @if(@Model.Properties.Amenity.Equals("PARKING"))
+                {
+                    <text>Car parking</text>
+                } else
+                {
+                    <text>Bicycle parking</text>
+                }
+            </span>
         </div>
 
         @if(!string.IsNullOrEmpty(@Model.Properties.Name))
@@ -65,8 +73,8 @@
         }
 
         <div class=mb-3>
-                <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Fee">Is Free to park: </label>
-                <span style="width:60%; float:right;" class="badge rounded-pill bg-light">
+            <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Fee">Is Free to park: </label>
+            <span style="width:60%; float:right;" class="badge rounded-pill bg-light">
                 @if(string.IsNullOrEmpty(@Model.Properties.Fee))
                 {
                     <text>No Data</text>
@@ -85,7 +93,7 @@
             </div>
         }
 
-        @if(!string.IsNullOrEmpty(@Model.Properties.Capacity))
+        @if(@Model.Properties.Capacity != null && @Model.Properties.Capacity>0)
         {
             <div class=mb-3>
                 <label style="width:25%;" class="badge rounded-pill bg-info" asp-for="Properties.Capacity">Parking Capacity: </label>

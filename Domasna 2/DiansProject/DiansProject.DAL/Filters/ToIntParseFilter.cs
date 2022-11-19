@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace DiansProject.DAL.Filters
 {
-    public class ToUpperCaseFilter : IFilter<string,string>
+    public class ToIntParseFilter : IFilter<string,int>
     {
-        public string execute(string input)
+        public int execute(string input)
         {
-            return input.ToUpper();
+            if (string.IsNullOrEmpty(input))
+                return -1;
+            return int.Parse(input);
         }
     }
 }

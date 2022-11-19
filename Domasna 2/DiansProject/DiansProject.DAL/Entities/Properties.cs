@@ -13,10 +13,10 @@ namespace DiansProject.DAL.Entities
         public string? Amenity { get; set; }
         public string? Fee { get; set; }
         public string? Parking { get; set; }
-        public string? Level { get; set; }
+        public int? Level { get; set; }
         public string? Name { get; set; }
         public string? NameEn { get; set; }
-        public string? Capacity { get; set; }
+        public int? Capacity { get; set; }
         public string? Wheelchair { get; set; }
         public string? BicycleParking { get; set; }
         public string? Covered { get; set; }

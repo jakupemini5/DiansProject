@@ -1,5 +1,6 @@
 ﻿@using DiansProject.DAL.Entities
-@model List<Feature>
+@using DiansProject.DAL.Models
+@model FeatureModel
 
 <style>
     #map {
@@ -9,7 +10,45 @@
 
 </style>
 
-<div id="map"></div>
+<table  class="table table-bordered table-striped" style="width:100%; display:inline-table; padding:0px; margin:0px; vertical-align: top;">
+    <tbody>
+        <tr>
+            <td width=20% style="padding:0px; margin:0px; vertical-align: top;">
+                <form asp-controller="Features" asp-action="Index">
+                    <table  class="table table-bordered table-striped" style="width:100%; display:inline-table; padding:0px; margin:0px;">
+                        <thead>
+                            <tr>
+                                <th width=20% style="">
+                                    <h2>Filters</h2>
+			                    </th>
+		                    </tr>
+	                    </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input asp-for="@Model.SearchParameters.CapacityCount" type="number" value=@TempData["searchParameters.CapacityCount"] /><br />
+                                    <span asp-validation-for="@Model.SearchParameters.CapacityCount"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input asp-for="@Model.SearchParameters.SearchText" type="text" value=@TempData["searchParameters.SearchText"] />
+                                    <span asp-validation-for="@Model.SearchParameters.SearchText"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input class="btn btn-outline-primary" type="submit" />
+                </form>
+                
+			</td>
+            <td style="padding:0px; margin:0px;" rowspan="3">
+                <div id="map"></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
 
 <script>
     var map = L.map('map').setView([41.9981, 21.4254], 12);
@@ -22,14 +61,16 @@
 
 
     
-    @foreach (var item in Model)
+    @foreach (var item in Model.Features)
     {
         <text>
             var marker = L.marker([@item.Geometry.Latitude, @item.Geometry.Longitude]).addTo(map);
             marker
             .bindPopup(
-                "Latitude: @item.Geometry.Latitude ,<br> Longitude: @item.Geometry.Longitude <br> " + 
-                "<form action='Features/Details'> <input type='hidden' name='Id' value='@item.Id' />  <input type='submit' value='View Details' class='btn btn-primary' name='SubmitButton'/></form>"
+                "<div style='width:100%;' class='badge rounded-pill bg-light'>Latitude: @item.Geometry.Latitude</div> <br>" +
+                "<div style='width:100%;' class='badge rounded-pill bg-light'>Longitude: @item.Geometry.Longitude</div> <br>" +
+                //"<br> Overall Rating: @item.AverageOverallRating <br> Safety Rating: @item.AverageSafetyRating <br> Conditions Rating: @item.AverageConditionsRating <br>" + 
+                "<form action='Features/Details'mvc target='_blank'> <input type='hidden' name='Id' value='@item.Id' />  <input type='submit' value='View Details' class='btn btn-primary' name='SubmitButton'/></form>"
             )
         </text>
     }

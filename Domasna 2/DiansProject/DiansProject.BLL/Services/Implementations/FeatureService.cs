@@ -1,5 +1,6 @@
 ﻿using DiansProject.BLL.Services.Interfaces;
 using DiansProject.DAL.Entities;
+using DiansProject.DAL.Models;
 using DiansProject.DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace DiansProject.BLL.Services.Implementations
             _featureRepository = featureRepository;
         }
 
-        public async Task<List<Feature>> GetAllFeatures()
+        public async Task<List<Feature>> GetAllFeatures(SearchParameters? searchParameters)
         {
-            return await _featureRepository.GetAllFeatures();
+            return await _featureRepository.GetAllFeatures(searchParameters);
         }
 
         public async Task<Feature> GetFeatureById(string id)
