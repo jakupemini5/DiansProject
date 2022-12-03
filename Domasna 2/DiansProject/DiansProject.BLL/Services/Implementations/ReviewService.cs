@@ -25,8 +25,6 @@ namespace DiansProject.BLL.Services.Implementations
 
         public async Task AddFeatureReview(string featureId, Review featureReview)
         {
-            featureReview.Id = Guid.NewGuid().ToString();
-            featureReview.Date = DateTime.Now;
             await _reviewRepository.AddFeatureReview(featureId, featureReview);
         }
         

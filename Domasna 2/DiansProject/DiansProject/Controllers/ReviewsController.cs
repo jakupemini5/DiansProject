@@ -1,6 +1,7 @@
 ﻿using DiansProject.BLL.Services.Interfaces;
 using DiansProject.DAL.Entities;
 using DiansProject.DAL.Repositories.Interfaces;
+using DiansProject.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiansProject.Controllers
@@ -27,12 +28,23 @@ namespace DiansProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string featureId, Review model)
+        public async Task<IActionResult> Create(ReviewRequestDTO model)
         {
             if (!ModelState.IsValid)
                 return View(model);
-            await _reviewService.AddFeatureReview(featureId, model);
-            return RedirectToAction("Index",new { featureId=featureId});
+
+            Review review = new Review()
+            {
+                ConditionsRating = model.ConditionsRating,
+                Description = model.Description,
+                Id = Guid.NewGuid().ToString(),
+                Date = DateTime.Now,
+                OverallRating = model.OverallRating,
+                SafetyRating = model.SafetyRating,
+                
+            };
+            await _reviewService.AddFeatureReview(model.FeatureId, review);
+            return RedirectToAction("Index",new { featureId=model.FeatureId});
         }
 
 
