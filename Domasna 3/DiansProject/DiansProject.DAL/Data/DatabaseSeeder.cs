@@ -23,9 +23,6 @@ namespace DiansProject.DAL.Data
                     SeedFromRawJsonData(context);
 
                     context.SaveChanges();
-                } else
-                { // TODO delete this - this is only used for testing purpouses 
-                    //SeedFromRawJsonData(context);
                 }
             }
         }
