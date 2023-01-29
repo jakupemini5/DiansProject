@@ -8,6 +8,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ReviewsMicroService/ReviewsMicroService.csproj", "ReviewsMicroService/"]
+COPY ["ReviewsMicroService.BLL/ReviewsMicroService.BLL.csproj", "ReviewsMicroService.BLL/"]
+COPY ["ReviewsMicroService.DAL/ReviewsMicroService.DAL.csproj", "ReviewsMicroService.DAL/"]
 RUN dotnet restore "ReviewsMicroService/ReviewsMicroService.csproj"
 COPY . .
 WORKDIR "/src/ReviewsMicroService"

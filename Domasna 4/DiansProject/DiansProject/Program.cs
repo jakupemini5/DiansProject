@@ -28,8 +28,6 @@ builder.Services.AddControllersWithViews();
 
 //repositories
 builder.Services.AddTransient<IFeatureRepository, FeatureRepository>();
-builder.Services.AddTransient<IReviewRepository, ReviewRepository>();
-
 
 //services
 builder.Services.AddTransient<IFeatureService, FeatureService>();

@@ -15,12 +15,9 @@ namespace DiansProject.BLL.Services.Implementations
     public class ReviewService : IReviewService
     {
         private readonly ReviewsMicroServiceConfiguration _reviewsConfiguration;
-        private readonly IReviewRepository _reviewRepository;
 
-        public ReviewService(IReviewRepository reviewRepository,
-            ReviewsMicroServiceConfiguration reviewsMicroServiceConfiguration)
+        public ReviewService(ReviewsMicroServiceConfiguration reviewsMicroServiceConfiguration)
         {
-            _reviewRepository = reviewRepository;
             _reviewsConfiguration = reviewsMicroServiceConfiguration;
         }
 
@@ -39,16 +36,17 @@ namespace DiansProject.BLL.Services.Implementations
                 {
                     var result = await response.Content.ReadAsStringAsync();
                     reviewResponseModels = JsonConvert.DeserializeObject<List<ReviewResponseModel>>(result);
+
+                    reviews = reviewResponseModels.Select(response => new Review()
+                    {
+                        Id = response.Id,
+                        ConditionsRating = response.ConditionsRating,
+                        Date = response.Date,
+                        Description = response.Description,
+                        OverallRating = response.OverallRating,
+                        SafetyRating = response.SafetyRating,
+                    }).ToList();
                 }
-                reviews = reviewResponseModels.Select(response => new Review()
-                {
-                    Id = response.Id,
-                    ConditionsRating = response.ConditionsRating,
-                    Date = response.Date,
-                    Description = response.Description,
-                    OverallRating = response.OverallRating,
-                    SafetyRating = response.SafetyRating,
-                }).ToList();
                 return reviews;
             }
                 
