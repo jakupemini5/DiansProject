@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Reviews.Controllers
+namespace ReviewsMicroService.Controllers
 {
     [ApiController]
     [Route("[controller]")]

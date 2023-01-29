@@ -1,4 +1,4 @@
-namespace Reviews
+namespace ReviewsMicroService
 {
     public class WeatherForecast
     {
