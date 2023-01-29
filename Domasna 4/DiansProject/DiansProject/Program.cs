@@ -3,6 +3,7 @@ using DiansProject.BLL.Services.Interfaces;
 using DiansProject.DAL.Data;
 using DiansProject.DAL.Repositories.Implementations;
 using DiansProject.DAL.Repositories.Interfaces;
+using DiansProject.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +34,10 @@ builder.Services.AddTransient<IReviewRepository, ReviewRepository>();
 //services
 builder.Services.AddTransient<IFeatureService, FeatureService>();
 builder.Services.AddTransient<IReviewService, ReviewService>();
+
+var cosmosConfig = new ReviewsMicroServiceConfiguration();
+Configuration.Bind("ReviewsMicroServiceConfiguration", cosmosConfig);
+builder.Services.AddSingleton(cosmosConfig);
 
 
 

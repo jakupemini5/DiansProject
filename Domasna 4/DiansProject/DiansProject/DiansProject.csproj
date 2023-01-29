@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DiansProject.BLL\DiansProject.BLL.csproj" />
     <ProjectReference Include="..\DiansProject.DAL\DiansProject.DAL.csproj" />
+    <ProjectReference Include="..\DiansProject.Infrastructure\DiansProject.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
