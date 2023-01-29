@@ -1,0 +1,53 @@
+﻿@using DiansProject.DAL.Entities
+@using DiansProject.DAL.Models
+@using DiansProject.Models.DTOs
+@model ReviewRequestDTO
+
+<div style="padding-left:10%; padding-right:10%">
+    <br />
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    <h2>Add Review</h2>
+			    </th>
+                <th>
+                    <form asp-controller="Features" asp-action="Details">
+                        <input type='hidden' name='Id' value='@TempData.Peek("featureId")' />  
+                        <input style="float:right;" class="btn btn-lg btn-outline-dark" type='submit' value='Get back to details'/>
+                    </form>
+			    </th>
+		    </tr>
+	    </thead>
+    </table>
+    <form method="post">
+        <div class="border p-3 mt-4">
+            <input  type="hidden" value=@TempData.Peek("FeatureId") name="featureId"/>
+            <div class="mb-3">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+                <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.Description"></span>
+            </div>
+
+            <div class="mb-3" style="width:300px;">
+                <label asp-for="ConditionsRating">Conditions Rating (1-5)</label>
+                <input class="form-range" type="range" max="5" min="1" asp-for="ConditionsRating" class="form-control" />
+                <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.ConditionsRating"></span>
+            </div>
+
+            <div class="mb-3" style="width:300px;">
+                <label asp-for="SafetyRating">Safety Rating (1-5)</label>
+                <input class="form-range" type="range" max="5" min="1" asp-for="SafetyRating" class="form-control" />
+                <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.SafetyRating"></span>
+            </div>
+
+            <div class="mb-3" style="width:300px;">
+                <label asp-for="OverallRating">Overall Rating (1-5)</</label>
+                <input class="form-range" type="range" max="5" min="1" asp-for="OverallRating" class="form-control" />
+                <span class="badge rounded-pill bg-opacity-50 bg-danger text-dark" asp-validation-for="@Model.OverallRating"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+    </form>
+</div>
