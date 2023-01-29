@@ -21,7 +21,7 @@ namespace ReviewsMicroService.DAL.Repositories.Implementations
 
         public async Task<List<Review>> GetFeatureReviews(string featureId)
         {
-            var feature = await _databaseContext.Features.FirstOrDefaultAsync(feature => feature.Id == featureId);
+            var feature = await _databaseContext.Features.FirstOrDefaultAsync(feature => feature.Id.Equals("node/" + featureId));
             if(feature == null)
             {
                 return null;

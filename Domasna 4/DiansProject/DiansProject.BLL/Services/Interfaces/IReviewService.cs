@@ -1,4 +1,6 @@
-﻿using DiansProject.DAL.Entities;
+﻿using DiansProject.BLL.Services.Implementations;
+using DiansProject.DAL.Entities;
+using DiansProject.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,6 @@ namespace DiansProject.BLL.Services.Interfaces
     public interface IReviewService
     {
         Task<List<Review>> GetFeatureReviews(string featureId);
-        Task AddFeatureReview(string featureId, Review featureReview);
+        Task AddFeatureReview(ReviewRequestDTO featureReview);
     }
 }
